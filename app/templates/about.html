@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Wind Speed Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Weather Prediction</div>
+        <ul>
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li><a href="{{ url_for('main.predict') }}">Predict</a></li>
+            <li><a href="{{ url_for('main.data_exploration') }}">Data Exploration</a></li>
+            <li><a href="{{ url_for('main.about') }}">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2>About Wind Speed Prediction</h2>
+            <p>This project aims to predict wind speed based on meteorological factors using multiple machine learning models.</p>
+
+            <h3>📊 Algorithm Performance</h3>
+            <table border="1" style="width:100%; border-collapse: collapse;">
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy (%)</th>
+                </tr>
+                {% for model, accuracy in model_accuracies.items() %}
+                <tr>
+                    <td>{{ model }}</td>
+                    <td>{{ accuracy }}%</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <h3>📁 Dataset Details</h3>
+            <p>Total Records: {{ total_records }}</p>
+            <p>Columns:</p>
+            <table border="1">
+                <tr>
+                    <th>Column Name</th>
+                </tr>
+                {% for col in columns %}
+                <tr>    
+                    <td>{{ col }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <h3>⚖️ Column-wise Weight Contribution</h3>
+            <table border="1" style="width:100%; border-collapse: collapse;">
+                <tr>
+                    <th>Feature</th>
+                    <th>Weight Contribution</th>
+                </tr>
+                {% for feature, weight in feature_weights.items() %}
+                <tr>
+                    <td>{{ feature }}</td>
+                    <td>{{ weight }}%</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
