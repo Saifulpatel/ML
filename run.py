@@ -1,7 +1,15 @@
 import os
-from app import create_app
+from flask import Flask
+from app.routes import main  # Ensure routes are imported
 
-app, port = create_app()
+def create_app():
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'your_secret_key'
+    
+    # Register blueprint
+    app.register_blueprint(main)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    # Get the port from the environment variable (default: 5000)
+    port = int(os.environ.get("PORT", 5000))
+
+    return app, port
